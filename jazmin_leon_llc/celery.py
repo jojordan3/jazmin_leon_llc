@@ -1,15 +1,15 @@
 """
-Celery config for jazmin_leon_llc project.
+Celery config for website_wagtail project.
 
 For more information on this file, see
 http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html
 
 Run your celery worker(s) as `djcelery`, which is an alias for
-`celery -A jazmin_leon_llc worker --loglevel=info`.
+`celery -A website_wagtail worker --loglevel=info`.
 
 A celerybeat scheduler can be started together with a worker by `djcelery -B`
 or as a separate process:
-`celery -A jazmin_leon_llc beat
+`celery -A website_wagtail beat
 --loglevel=info -s /tmp/celerybeat-schedule`.
 It needs to store the last run times of the tasks in a local database file:
 if no -s option is provided it defaults to the cwd.
@@ -25,9 +25,9 @@ from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                      "jazmin_leon_llc.settings.production")
+                      "jazminleon.settings.production")
 
-app = Celery("jazmin_leon_llc")
+app = Celery("jazminleon")
 
-app.config_from_object('django.conf:settings')
+app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
